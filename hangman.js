@@ -8,6 +8,7 @@ const POSSIBLE_WORDS = ["amity", "candor", "dauntless",
 
         let randomIndex = parseInt((Math.random() * POSSIBLE_WORDS.length));
         word = POSSIBLE_WORDS[randomIndex];
+        guesses = "";
         updatePage();
     }
     let updatePage = function() {
@@ -27,12 +28,22 @@ const POSSIBLE_WORDS = ["amity", "candor", "dauntless",
 
             let guessArea = document.getElementById("guesses");
             guessArea.textContent = "Guesses: " + guesses;
+
+            let image = document.getElementById("hangmanpic");
+            image.src = `images/hangman${guessCount}.gif`;
     }
-    
-    let gueesLetter = function() {
+
+    let guessLetter = function() {
         let input = document.getElementById("guess");
         let letter = input.value;
+        letter = letter.toLowerCase();
+        if(word.indexOf(letter) < 0) {
+            guessCount--;
+        }
+        else {
+        }
         guesses += letter;
+        input.value = "";
         updatePage();
     }
     
